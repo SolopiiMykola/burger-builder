@@ -18,7 +18,7 @@ const burgerIngridient = (props) => {
             );
             break;
         case ('meat'):
-            ingridient = <div className={classes.Meet}></div>;
+            ingridient = <div className={classes.Meat}></div>;
             break;
         case ('cheese'):
             ingridient = <div className={classes.Cheese}></div>;
