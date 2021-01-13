@@ -1,30 +1,33 @@
-import React, {useEffect} from 'react';
+import React, {Component} from 'react';
 import classes from './Modal.module.css';
 import Aux from '../../../hoc/Aux/Aux';
 import Backdrop from '../Backdrop/Backdrop';
 
-const Modal = (props) => {
+class Modal extends Component {
 
-    useEffect(() => {
-        console.log('[Modal.js] 2nd useEffect');
-        return () => {
-            // props.show == false;
-        }
-    }, [])
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.show !== this.props.show || nextProps.children !== this.props.children;
+    }
 
-   return (
-    <Aux>
-            <Backdrop show={props.show} clicked={props.modalClose}></Backdrop>
-            <div 
-            className={classes.Modal}
-            style={{
-                transform: props.show ? 'translateY(0)' : 'translateY(-100vh)',
-                opacity: props.show ? '1' : '0'
-            }}>
-                {props.children}
-            </div>
-        </Aux>
-   ) 
+    componentWillUpdate() {
+        console.log('[Modal] WillUpdate');
+    }
+
+    render() {
+        return (
+            <Aux>
+                    <Backdrop show={this.props.show} clicked={this.props.modalClose}></Backdrop>
+                    <div 
+                    className={classes.Modal}
+                    style={{
+                        transform: this.props.show ? 'translateY(0)' : 'translateY(-100vh)',
+                        opacity: this.props.show ? '1' : '0'
+                    }}>
+                        {this.props.children}
+                    </div>
+                </Aux>
+           ) 
+    }
 }
 
-export default React.memo(Modal);
+export default Modal;
